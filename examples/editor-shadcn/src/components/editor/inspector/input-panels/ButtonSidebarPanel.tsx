@@ -4,6 +4,7 @@ import { ZodError } from 'zod';
 import ToggleButton from './helpers/inputs/ToggleButton';
 import { ButtonProps, ButtonPropsDefaults, ButtonPropsSchema } from '@usewaypoint/block-button';
 
+import AiTextActions from '../../../../ai/AiTextActions';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import ColorInput from './helpers/inputs/ColorInput';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
@@ -16,6 +17,7 @@ type ButtonSidebarPanelProps = {
 };
 export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanelProps) {
   const [, setErrors] = useState<ZodError | null>(null);
+  const [aiRev, setAiRev] = useState(0);
 
   const updateData = (d: unknown) => {
     const res = ButtonPropsSchema.safeParse(d);
@@ -37,11 +39,23 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
 
   return (
     <BaseSidebarPanel title="Button block">
-      <TextInput
-        label="Text"
-        defaultValue={text}
-        onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
-      />
+      <div className="relative">
+        <div className="absolute -top-1 right-0 z-10">
+          <AiTextActions
+            getText={() => text}
+            onApply={(text) => {
+              updateData({ ...data, props: { ...data.props, text } });
+              setAiRev((n) => n + 1);
+            }}
+          />
+        </div>
+        <TextInput
+          key={aiRev}
+          label="Text"
+          defaultValue={text}
+          onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
+        />
+      </div>
       <TextInput
         label="Url"
         defaultValue={url}

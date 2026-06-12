@@ -1,6 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
-import { Reader, renderToStaticMarkup } from '@usewaypoint/email-builder';
+import { Info, SunMoon } from 'lucide-react';
+
+import { Reader, renderToStaticMarkup } from '@/email';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { useT } from '@/lib/i18n';
 
 import EditorBlock from '@/documents/editor/EditorBlock';
 import {
@@ -28,9 +34,11 @@ function JsonPanel() {
 }
 
 function MainPanel() {
+  const t = useT();
   const document = useDocument();
   const selectedMainTab = useSelectedMainTab();
   const selectedScreenSize = useSelectedScreenSize();
+  const [darkSim, setDarkSim] = useState(false);
 
   const frameClass = cn(
     'mx-auto my-8 overflow-hidden rounded-lg border bg-white shadow-sm',
@@ -46,9 +54,30 @@ function MainPanel() {
       );
     case 'preview':
       return (
-        <div className={frameClass}>
-          <Reader document={document} rootBlockId="root" />
-        </div>
+        <>
+          <div
+            className={cn(
+              'mx-auto mt-6 flex items-center justify-center gap-2',
+              selectedScreenSize === 'mobile' ? 'w-[370px]' : 'w-full max-w-[600px]',
+            )}
+            onClick={(ev) => ev.stopPropagation()}
+          >
+            <SunMoon className="size-4 text-muted-foreground" />
+            <Label htmlFor="dark-sim" className="text-xs text-muted-foreground">
+              {t('preview.darkToggle')}
+            </Label>
+            <Switch id="dark-sim" checked={darkSim} onCheckedChange={setDarkSim} />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Info className="size-3.5 text-muted-foreground" />
+              </TooltipTrigger>
+              <TooltipContent className="max-w-72">{t('preview.darkInfo')}</TooltipContent>
+            </Tooltip>
+          </div>
+          <div className={cn(frameClass, 'mt-3', darkSim && 'dark-email-sim')}>
+            <Reader document={document} rootBlockId="root" />
+          </div>
+        </>
       );
     case 'html':
       return (

@@ -21,5 +21,5 @@ const ColumnsContainerPropsSchema = z.object({
     .nullable(),
 });
 
-export type ColumnsContainerProps = z.infer<typeof ColumnsContainerPropsSchema>;
 export default ColumnsContainerPropsSchema;
+export type ColumnsContainerProps = z.infer<typeof ColumnsContainerPropsSchema>;

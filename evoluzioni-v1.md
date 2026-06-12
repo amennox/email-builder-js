@@ -85,7 +85,8 @@ Toggle `SunMoon` nella tab Anteprima che applica al wrapper della preview una si
 
 Architettura (`src/ai/`):
 
-- `client.ts`: chiamate **OpenAI-compatible** (`POST {baseUrl}/chat/completions`) con `baseUrl`, `model`, `apiKey` da `.env` (`VITE_AI_BASE_URL`, `VITE_AI_MODEL`, `VITE_AI_API_KEY`); `.env.example` nel repo, `.env` in `.gitignore`. **Nota di sicurezza obbligatoria nel README:** in Vite il token è visibile nel bundle → solo demo; per produzione lo stesso client punta a un proxy della piattaforma (basta cambiare `baseUrl`, zero modifiche ai prompt).
+- **Proxy locale obbligatorio (decisione confermata):** il token NON sta mai nel client. Piccolo server Node (`server/ai-proxy.mjs`, zero dipendenze) che legge `AI_BASE_URL`, `AI_MODEL`, `AI_API_KEY` da `server/.env` (con `.env.example` committato, `.env` in `.gitignore`) ed espone `POST /ai/chat` + `GET /ai/health` con CORS per il dev server. Avvio: `npm run ai-proxy`.
+- `client.ts`: il frontend chiama solo il proxy (`VITE_AI_PROXY_URL`, default `http://localhost:8787`); in piattaforma basterà puntare la stessa variabile al proxy di produzione, zero modifiche ai prompt.
 - `prompts/`: un file per caso d'uso (`rewrite.ts`, `translate.ts`, `generateSection.ts`), prompt ben identificabili e versionati nel sorgente come richiesto.
 - Funzionalità UI:
   1. **Copywriting**: nel pannello dei blocchi Text/Heading/Button, menu `Sparkles` con azioni "Migliora", "Più formale", "Più persuasivo", "Accorcia" → sostituisce il testo del blocco (markdown preservato, istruito nel prompt);

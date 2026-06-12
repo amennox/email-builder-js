@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Braces,
@@ -11,10 +11,12 @@ import {
   Moon,
   PanelRight,
   Pencil,
+  Redo2,
   Save,
   Share2,
   Smartphone,
   Sun,
+  Undo2,
   Upload,
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -41,9 +43,12 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
   markSaved,
+  redo,
   setSelectedMainTab,
   setSelectedScreenSize,
   toggleInspectorDrawerOpen,
+  undo,
+  useCanUndoRedo,
   useCurrentTemplateId,
   useCurrentTemplateName,
   useDocument,
@@ -58,6 +63,8 @@ import { toggleUiTheme } from '@/lib/theme';
 import { getTemplate, saveTemplate } from '@/templates/templateStore';
 
 import ImportJsonDialog from './ImportJsonDialog';
+import PreflightDialog from './PreflightDialog';
+import WeightBadge from './WeightBadge';
 
 function downloadJson(document: object, name: string) {
   const blob = new Blob([JSON.stringify(document, null, 2)], { type: 'application/json' });
@@ -83,6 +90,28 @@ export default function EditorToolbar() {
   const [importOpen, setImportOpen] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [, forceRender] = useState(0);
+  const { canUndo, canRedo } = useCanUndoRedo();
+
+  // Scorciatoie: Cmd/Ctrl+Z (undo), Shift+Cmd/Ctrl+Z (redo)
+  useEffect(() => {
+    const listener = (ev: KeyboardEvent) => {
+      if (!(ev.metaKey || ev.ctrlKey) || ev.key.toLowerCase() !== 'z') {
+        return;
+      }
+      const target = ev.target as HTMLElement | null;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+        return; // lascia l'undo nativo nei campi di testo
+      }
+      ev.preventDefault();
+      if (ev.shiftKey) {
+        redo();
+      } else {
+        undo();
+      }
+    };
+    window.addEventListener('keydown', listener);
+    return () => window.removeEventListener('keydown', listener);
+  }, []);
 
   const displayName = templateName ?? t('editor.untitled');
 
@@ -141,6 +170,25 @@ export default function EditorToolbar() {
       <div className="flex min-w-0 items-center gap-2">
         <span className="truncate text-sm font-medium">{displayName}</span>
         {isDirty && <Badge variant="secondary">{t('editor.unsaved')}</Badge>}
+        <WeightBadge />
+        <div className="ml-1 flex items-center">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" className="size-8" disabled={!canUndo} onClick={undo}>
+                <Undo2 />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>{t('editor.undo')}</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" className="size-8" disabled={!canRedo} onClick={redo}>
+                <Redo2 />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>{t('editor.redo')}</TooltipContent>
+          </Tooltip>
+        </div>
       </div>
 
       <Tabs value={selectedMainTab} onValueChange={(v) => setSelectedMainTab(v as typeof selectedMainTab)}>
@@ -203,6 +251,8 @@ export default function EditorToolbar() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <PreflightDialog />
 
         <Tooltip>
           <TooltipTrigger asChild>

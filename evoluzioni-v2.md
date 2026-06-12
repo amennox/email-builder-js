@@ -15,11 +15,13 @@
 | V2.5 | Persistenza cloud + versioning (adapter) | 4–8 gg | — |
 | V2.6 | Media library + AI immagini | 8–15 gg | V2.5 (storage) |
 | V2.7 | Synced blocks (moduli sincronizzati) | 5–8 gg | V2.5 |
-| V2.8 | Commenti sui blocchi → realtime multiplayer | 3–5 gg / 15–25 gg | V2.5 |
+| V2.8 | Commenti ancorati ai blocchi | 3–5 gg | V2.5 |
 
-**Totale V2: ~37–74 giorni** (la forbice dipende soprattutto da V2.6 e V2.8).
+**Totale V2: ~37–57 giorni** (la forbice dipende soprattutto da V2.6).
 
-**Ordine consigliato:** V2.1 → V2.3 → V2.2 → V2.4 → V2.5 → V2.7 → V2.8 (commenti) → V2.6 → V2.8 (realtime, solo se la domanda lo giustifica).
+**Ordine consigliato:** V2.1 → V2.3 → V2.2 → V2.4 → V2.5 → V2.7 → V2.8 → V2.6.
+
+> **Decisione (giugno 2026):** il multiplayer realtime in stile Figma è stato **rimosso dal piano** per ROI insufficiente su un modulo embedded. Resta V2.8 (commenti). Se in futuro emergesse domanda reale, andrà rivalutato con un PRD dedicato.
 
 ---
 
@@ -89,14 +91,11 @@ Design pragmatico, senza riscrivere il modello dati: nuovo tipo di nodo `SyncedB
 
 **Accettazione:** modifica del footer in libreria visibile in 3 template che lo referenziano senza riaprirli; "scollega" crea copia indipendente; nessun ciclo possibile (test).
 
-## V2.8 Collaborazione: prima i commenti, poi (eventuale) realtime
+## V2.8 Commenti ancorati ai blocchi
 
-Approccio a due stadi, per il punto 3 della valutazione critica:
+Thread di commenti per blockId persistiti via repository (V2.5), indicatore `MessageCircle` con contatore sul blocco, pannello laterale "Commenti" con risoluzione thread, menzioni semplici. Copre il bisogno reale di review aziendale senza i costi del realtime (rimosso dal piano — vedi nota in §1).
 
-- **Stadio 1 — Commenti ancorati ai blocchi (3–5 gg):** thread di commenti per blockId persistiti via repository (V2.5), indicatore `MessageCircle` con contatore sul blocco, pannello laterale "Commenti" con risoluzione thread, menzioni semplici. Copre l'80% del bisogno reale di review aziendale.
-- **Stadio 2 — Realtime multiplayer (15–25 gg, GO/NO-GO separato):** CRDT con Yjs (`y-websocket` o piattaforma realtime esistente), binding sullo store zustand del documento, presence (avatar + cursori/selezioni colorate), gestione conflitti inclusa nel CRDT, locking PRD §4.2 integrato come permesso di scrittura. Decidere solo con domanda utente verificata: è la voce con il peggior rapporto costo/beneficio per un modulo embedded.
-
-**Accettazione (stadio 1):** due utenti (sessioni) vedono gli stessi thread; risoluzione e riapertura; commento su blocco eliminato resta consultabile nel pannello. (Stadio 2: criteri da definire nel suo PRD dedicato.)
+**Accettazione:** due utenti (sessioni) vedono gli stessi thread; risoluzione e riapertura; commento su blocco eliminato resta consultabile nel pannello.
 
 ---
 

@@ -107,6 +107,48 @@ const it = {
   'tune.duplicate': 'Duplica',
   'tune.delete': 'Elimina',
 
+  // Peso HTML / undo
+  'weight.ok': 'Peso HTML stimato. Limite Gmail: 100 KB.',
+  'weight.warning': 'Attenzione: vicino o oltre il limite di 102 KB, Gmail tronca il messaggio (clipping).',
+  'editor.undo': 'Annulla (Cmd/Ctrl+Z)',
+  'editor.redo': 'Ripristina (Shift+Cmd/Ctrl+Z)',
+
+  // Dark preview
+  'preview.darkToggle': 'Simula dark mode',
+  'preview.darkInfo':
+    'Simulazione dell’inversione colori tipica dei client email. La gestione reale (asset alternativi, selettori Gmail) arriva con la pipeline MJML.',
+
+  // AI
+  'ai.improve': 'Migliora',
+  'ai.formal': 'Più formale',
+  'ai.persuasive': 'Più persuasivo',
+  'ai.shorten': 'Accorcia',
+  'ai.translate': 'Traduci in…',
+  'ai.generating': 'Generazione AI…',
+  'ai.error': 'Errore AI: riprova.',
+  'ai.unavailable': 'Proxy AI non raggiungibile. Avvialo con: npm run ai-proxy',
+  'ai.generateSection': 'Genera con AI',
+  'ai.generateSection.title': 'Genera una sezione con l’AI',
+  'ai.generateSection.description':
+    'Descrivi la sezione da creare (es. "tre prodotti in offerta con sfondo azzurro e bottone rosso").',
+  'ai.generateSection.placeholder': 'Descrivi la sezione…',
+  'ai.generateSection.submit': 'Genera',
+  'ai.generateSection.invalid': 'L’AI ha prodotto una struttura non valida. Riprova con una descrizione diversa.',
+  'ai.done': 'Fatto.',
+
+  // Preflight
+  'preflight.title': 'Verifica email',
+  'preflight.subtitle': 'Controlli di qualità e accessibilità prima dell’invio.',
+  'preflight.ok': 'Nessun problema rilevato.',
+  'preflight.missingAlt': 'Immagine senza testo alternativo (alt)',
+  'preflight.emptyHref': 'Bottone o link senza destinazione (href)',
+  'preflight.lowContrast': 'Contrasto testo/sfondo insufficiente (WCAG < 4.5:1)',
+  'preflight.overweight': 'HTML oltre la soglia di 100 KB (clipping Gmail)',
+  'preflight.goToBlock': 'Vai al blocco',
+
+  // Drag & drop
+  'dnd.dragHandle': 'Trascina per riordinare',
+
   // Exports
   'exports.title': 'Esportazioni',
   'exports.subtitle': 'Storico delle esportazioni di questa sessione.',

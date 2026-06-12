@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
-import { Reader } from '@usewaypoint/email-builder';
+import { Reader } from '@/email';
 
 import { TEditorConfiguration } from '@/documents/editor/core';
 

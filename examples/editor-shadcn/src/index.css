@@ -71,6 +71,15 @@
   --color-ring: var(--ring);
 }
 
+/* V1.6 — simulazione dark mode dei client email (solo anteprima editor).
+   La gestione reale (dual asset, [data-ogsc]) arriva con la pipeline MJML. */
+.dark-email-sim {
+  filter: invert(0.9) hue-rotate(180deg);
+}
+.dark-email-sim img {
+  filter: invert(1.111) hue-rotate(180deg);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

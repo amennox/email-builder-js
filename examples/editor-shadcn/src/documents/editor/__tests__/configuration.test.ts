@@ -1,7 +1,9 @@
-import { renderToStaticMarkup } from '@usewaypoint/email-builder';
+import { renderToStaticMarkup } from '../../../email';
 import { describe, expect, it } from 'vitest';
 
 import EMPTY_EMAIL_MESSAGE from '../../../getConfiguration/sample/empty-email-message';
+import HOTEL_POST_STAY from '../../../getConfiguration/sample/hotel-post-stay';
+import HOTEL_PRE_STAY from '../../../getConfiguration/sample/hotel-pre-stay';
 import ONE_TIME_PASSCODE from '../../../getConfiguration/sample/one-time-passcode';
 import ORDER_ECOMMERCE from '../../../getConfiguration/sample/order-ecommerce';
 import POST_METRICS_REPORT from '../../../getConfiguration/sample/post-metrics-report';
@@ -15,6 +17,8 @@ import validateJsonStringValue from '../validateJsonStringValue';
 
 const SAMPLES = {
   'empty-email-message': EMPTY_EMAIL_MESSAGE,
+  'hotel-pre-stay': HOTEL_PRE_STAY,
+  'hotel-post-stay': HOTEL_POST_STAY,
   'one-time-passcode': ONE_TIME_PASSCODE,
   'order-ecommerce': ORDER_ECOMMERCE,
   'post-metrics-report': POST_METRICS_REPORT,

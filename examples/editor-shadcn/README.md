@@ -17,6 +17,26 @@ npm run build    # build di produzione
 npm run preview  # smoke test della build
 ```
 
+## Funzionalità V1 (evoluzioni-v1.md)
+
+- **Template Hospitality**: due prefab curati "Hotel — Pre-stay" (servizi del soggiorno) e "Hotel — Post-stay" (feedback + incentivo ritorno), palette verde bosco/crema/terracotta, heading serif.
+- **Undo/Redo**: cronologia del documento (100 step) con bottoni in toolbar e Cmd/Ctrl+Z / Shift+Cmd/Ctrl+Z; azzerata al cambio template.
+- **Monitor peso HTML**: badge in toolbar (neutro < 80 KB, ambra 80–100, rosso oltre) per il limite di clipping Gmail.
+- **Drag & drop**: riordino dei blocchi nello stesso contenitore con maniglia on-hover (dnd-kit); le frecce su/giù restano come fallback.
+- **Colonne su mobile**: switch "Stack columns on mobile" (layout fluid-hybrid che si impila senza media query) e "Reverse order on mobile" (tecnica `dir=rtl`, ordine desktop invariato).
+- **Anteprima dark mode**: toggle nella tab Anteprima (simulazione; la gestione reale arriva con la pipeline MJML, v2).
+- **AI Assist**: riscrittura (migliora/formale/persuasivo/accorcia) e traduzione dei testi nei pannelli Text/Heading/Button; "Genera con AI" nel menu blocchi (prompt → sezione JSON validata con zod, retry automatico). **Il token non tocca mai il browser**: tutte le chiamate passano dal proxy.
+- **Verifica (preflight)**: pannello con controlli alt mancanti, link vuoti, contrasto WCAG < 4.5:1 e peso oltre soglia, con "Vai al blocco".
+
+### Proxy AI (obbligatorio per le funzioni AI)
+
+```bash
+cp server/.env.example server/.env   # inserisci AI_API_KEY (e opzionalmente AI_BASE_URL/AI_MODEL)
+npm run ai-proxy                      # http://localhost:8787
+```
+
+Il frontend parla solo con il proxy (`VITE_AI_PROXY_URL`, default `http://localhost:8787`): in produzione la stessa variabile punta al proxy della piattaforma. `server/.env` è in `.gitignore`. Senza proxy attivo le azioni AI mostrano un errore esplicativo; tutto il resto dell'app funziona normalmente.
+
 ## Funzionalità
 
 - **Shell del portale**: header h-16 con zona logo su gradiente, ricerca template (popover risultati su prefatti e personali), selettore lingua IT/EN persistito, notifiche e utente placeholder (profilo/cambio password/logout solo visivi, nessuna autenticazione reale).

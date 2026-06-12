@@ -33,7 +33,7 @@ import { openTemplate } from './navigation';
 // Utente fittizio: la parte di autenticazione è un placeholder visivo.
 const DEMO_USER = {
   name: 'Andrea Menozzi',
-  email: 'a.menozzi@strategicamente.tech',
+  email: 'a.menozzi@email.com',
   initials: 'AM',
 };
 

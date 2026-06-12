@@ -1,4 +1,4 @@
-import { renderToStaticMarkup } from '@usewaypoint/email-builder';
+import { renderToStaticMarkup } from '@/email';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 

@@ -3,6 +3,7 @@ import { ZodError } from 'zod';
 
 import { TextProps, TextPropsSchema } from '@usewaypoint/block-text';
 
+import AiTextActions from '../../../../ai/AiTextActions';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import BooleanInput from './helpers/inputs/BooleanInput';
 import TextInput from './helpers/inputs/TextInput';
@@ -14,6 +15,7 @@ type TextSidebarPanelProps = {
 };
 export default function TextSidebarPanel({ data, setData }: TextSidebarPanelProps) {
   const [, setErrors] = useState<ZodError | null>(null);
+  const [aiRev, setAiRev] = useState(0);
 
   const updateData = (d: unknown) => {
     const res = TextPropsSchema.safeParse(d);
@@ -27,12 +29,24 @@ export default function TextSidebarPanel({ data, setData }: TextSidebarPanelProp
 
   return (
     <BaseSidebarPanel title="Text block">
-      <TextInput
-        label="Content"
-        rows={5}
-        defaultValue={data.props?.text ?? ''}
-        onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
-      />
+      <div className="relative">
+        <div className="absolute -top-1 right-0 z-10">
+          <AiTextActions
+            getText={() => data.props?.text ?? ''}
+            onApply={(text) => {
+              updateData({ ...data, props: { ...data.props, text } });
+              setAiRev((n) => n + 1);
+            }}
+          />
+        </div>
+        <TextInput
+          key={aiRev}
+          label="Content"
+          rows={5}
+          defaultValue={data.props?.text ?? ''}
+          onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
+        />
+      </div>
       <BooleanInput
         label="Markdown (GitHub flavored)"
         defaultValue={data.props?.markdown ?? false}

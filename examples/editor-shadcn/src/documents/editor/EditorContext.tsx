@@ -1,4 +1,7 @@
-import { create } from 'zustand';
+import { useStore } from 'zustand';
+import { createStore } from 'zustand';
+import { useStoreWithEqualityFn } from 'zustand/traditional';
+import { temporal } from 'zundo';
 
 import { getInitialLocale, LOCALE_STORAGE_KEY, type TLocale } from '../../lib/i18n/core';
 import getConfiguration from '../../getConfiguration';
@@ -25,7 +28,9 @@ type TValue = {
   inspectorDrawerOpen: boolean;
 };
 
-const editorStateStore = create<TValue>(() => ({
+const editorStateStore = createStore<TValue>()(
+  temporal(
+    (): TValue => ({
   document: getConfiguration(window.location.hash),
   currentView: window.location.hash.startsWith('#code/') ? 'editor' : 'dashboard',
   locale: getInitialLocale(),
@@ -36,43 +41,77 @@ const editorStateStore = create<TValue>(() => ({
   selectedSidebarTab: 'styles',
   selectedMainTab: 'editor',
   selectedScreenSize: 'desktop',
-  inspectorDrawerOpen: true,
-}));
+      inspectorDrawerOpen: true,
+    }),
+    {
+      // Undo/redo: traccia solo il documento email
+      partialize: (s) => ({ document: s.document }) as TValue,
+      limit: 100,
+      equality: (pastState, currentState) => pastState.document === currentState.document,
+    },
+  ),
+);
+
+function useEditorStore<U>(selector: (s: TValue) => U): U {
+  return useStore(editorStateStore, selector);
+}
+
+// ---- Undo / Redo ----
+
+export function undo() {
+  editorStateStore.temporal.getState().undo();
+}
+
+export function redo() {
+  editorStateStore.temporal.getState().redo();
+}
+
+export function clearHistory() {
+  editorStateStore.temporal.getState().clear();
+}
+
+export function useCanUndoRedo() {
+  return useStoreWithEqualityFn(
+    editorStateStore.temporal,
+    (s) => ({ canUndo: s.pastStates.length > 0, canRedo: s.futureStates.length > 0 }),
+    (a, b) => a.canUndo === b.canUndo && a.canRedo === b.canRedo,
+  );
+}
 
 export function useDocument() {
-  return editorStateStore((s) => s.document);
+  return useEditorStore((s) => s.document);
 }
 
 export function useCurrentView() {
-  return editorStateStore((s) => s.currentView);
+  return useEditorStore((s) => s.currentView);
 }
 
 export function useLocale() {
-  return editorStateStore((s) => s.locale);
+  return useEditorStore((s) => s.locale);
 }
 
 export function useCurrentTemplateId() {
-  return editorStateStore((s) => s.currentTemplateId);
+  return useEditorStore((s) => s.currentTemplateId);
 }
 
 export function useCurrentTemplateName() {
-  return editorStateStore((s) => s.currentTemplateName);
+  return useEditorStore((s) => s.currentTemplateName);
 }
 
 export function useIsDirty() {
-  return editorStateStore((s) => s.isDirty);
+  return useEditorStore((s) => s.isDirty);
 }
 
 export function useSelectedBlockId() {
-  return editorStateStore((s) => s.selectedBlockId);
+  return useEditorStore((s) => s.selectedBlockId);
 }
 
 export function useSelectedScreenSize() {
-  return editorStateStore((s) => s.selectedScreenSize);
+  return useEditorStore((s) => s.selectedScreenSize);
 }
 
 export function useSelectedMainTab() {
-  return editorStateStore((s) => s.selectedMainTab);
+  return useEditorStore((s) => s.selectedMainTab);
 }
 
 export function setSelectedMainTab(selectedMainTab: TValue['selectedMainTab']) {
@@ -80,11 +119,11 @@ export function setSelectedMainTab(selectedMainTab: TValue['selectedMainTab']) {
 }
 
 export function useSelectedSidebarTab() {
-  return editorStateStore((s) => s.selectedSidebarTab);
+  return useEditorStore((s) => s.selectedSidebarTab);
 }
 
 export function useInspectorDrawerOpen() {
-  return editorStateStore((s) => s.inspectorDrawerOpen);
+  return useEditorStore((s) => s.inspectorDrawerOpen);
 }
 
 export function setCurrentView(currentView: TView) {
@@ -141,6 +180,7 @@ export function loadTemplate(
   document: TValue['document'],
   meta: { templateId: string | null; templateName: string | null },
 ) {
+  editorStateStore.temporal.getState().clear();
   return editorStateStore.setState({
     document,
     selectedSidebarTab: 'styles',

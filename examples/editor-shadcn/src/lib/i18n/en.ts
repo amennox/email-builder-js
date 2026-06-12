@@ -109,6 +109,48 @@ const en: Record<keyof typeof it, string> = {
   'tune.duplicate': 'Duplicate',
   'tune.delete': 'Delete',
 
+  // Peso HTML / undo
+  'weight.ok': 'Estimated HTML weight. Gmail limit: 100 KB.',
+  'weight.warning': 'Warning: near or over the 102 KB limit, Gmail clips the message.',
+  'editor.undo': 'Undo (Cmd/Ctrl+Z)',
+  'editor.redo': 'Redo (Shift+Cmd/Ctrl+Z)',
+
+  // Dark preview
+  'preview.darkToggle': 'Simulate dark mode',
+  'preview.darkInfo':
+    'Simulation of the color inversion applied by email clients. Real handling (alternative assets, Gmail selectors) comes with the MJML pipeline.',
+
+  // AI
+  'ai.improve': 'Improve',
+  'ai.formal': 'More formal',
+  'ai.persuasive': 'More persuasive',
+  'ai.shorten': 'Shorten',
+  'ai.translate': 'Translate to…',
+  'ai.generating': 'AI generating…',
+  'ai.error': 'AI error: please retry.',
+  'ai.unavailable': 'AI proxy unreachable. Start it with: npm run ai-proxy',
+  'ai.generateSection': 'Generate with AI',
+  'ai.generateSection.title': 'Generate a section with AI',
+  'ai.generateSection.description':
+    'Describe the section to create (e.g. "three products on sale with light blue background and red button").',
+  'ai.generateSection.placeholder': 'Describe the section…',
+  'ai.generateSection.submit': 'Generate',
+  'ai.generateSection.invalid': 'The AI produced an invalid structure. Try a different description.',
+  'ai.done': 'Done.',
+
+  // Preflight
+  'preflight.title': 'Email check',
+  'preflight.subtitle': 'Quality and accessibility checks before sending.',
+  'preflight.ok': 'No issues found.',
+  'preflight.missingAlt': 'Image without alternative text (alt)',
+  'preflight.emptyHref': 'Button or link without destination (href)',
+  'preflight.lowContrast': 'Insufficient text/background contrast (WCAG < 4.5:1)',
+  'preflight.overweight': 'HTML over the 100 KB threshold (Gmail clipping)',
+  'preflight.goToBlock': 'Go to block',
+
+  // Drag & drop
+  'dnd.dragHandle': 'Drag to reorder',
+
   // Exports
   'exports.title': 'Exports',
   'exports.subtitle': 'Export history for this session.',

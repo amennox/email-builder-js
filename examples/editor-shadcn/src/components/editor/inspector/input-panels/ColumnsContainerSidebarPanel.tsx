@@ -11,6 +11,7 @@ import ColumnsContainerPropsSchema, {
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import ColumnWidthsInput from './helpers/inputs/ColumnWidthsInput';
+import BooleanInput from './helpers/inputs/BooleanInput';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import SliderInput from './helpers/inputs/SliderInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
@@ -78,6 +79,18 @@ export default function ColumnsContainerPanel({ data, setData }: ColumnsContaine
         </ToggleButton>
       </RadioGroupInput>
 
+      <BooleanInput
+        label="Stack columns on mobile"
+        defaultValue={data.props?.stackOnMobile ?? false}
+        onChange={(stackOnMobile) => updateData({ ...data, props: { ...data.props, stackOnMobile } })}
+      />
+      <BooleanInput
+        label="Reverse order on mobile"
+        defaultValue={data.props?.reverseColumnsOnMobile ?? false}
+        onChange={(reverseColumnsOnMobile) =>
+          updateData({ ...data, props: { ...data.props, reverseColumnsOnMobile } })
+        }
+      />
       <MultiStylePropertyPanel
         names={['backgroundColor', 'padding']}
         value={data.style}
