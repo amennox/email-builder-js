@@ -1,4 +1,4 @@
-# EmailBuilder.js — Editor Moderno Enterprise per Email
+# EmailBuilder.js  —  Editor Moderno Enterprise per Email
 
 <div align="center">
   <a href="https://github.com/amennox/email-builder-js">GitHub</a>&emsp;·&emsp;
