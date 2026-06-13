@@ -41,6 +41,7 @@ export default function ColorInput({ label, defaultValue, onChange, nullable }: 
           <PopoverContent className="w-auto p-3" align="start">
             <Picker
               value={value || ''}
+              fieldLabel={label}
               onChange={(v) => {
                 setValue(v);
                 onChange(v);

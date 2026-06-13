@@ -102,6 +102,67 @@ const en: Record<keyof typeof it, string> = {
   'inspector.styles': 'Styles',
   'inspector.block': 'Block',
   'inspector.noSelection': 'Select a block to configure it.',
+  'inspector.blockNotFound': 'Block not found. Click a block to reset.',
+
+  // Inspector — EmailLayout
+  'inspector.global.title': 'Global',
+  'inspector.global.backdropColor': 'Backdrop color',
+  'inspector.global.canvasColor': 'Canvas color',
+  'inspector.global.canvasBorderColor': 'Canvas border color',
+  'inspector.global.canvasBorderRadius': 'Canvas border radius',
+  'inspector.global.fontFamily': 'Font family',
+  'inspector.global.textColor': 'Text color',
+
+  // Inspector — blocks
+  'inspector.heading.title': 'Heading block',
+  'inspector.heading.content': 'Content',
+  'inspector.heading.level': 'Level',
+
+  'inspector.text.title': 'Text block',
+  'inspector.text.content': 'Content',
+  'inspector.text.markdown': 'Markdown (GitHub flavored)',
+
+  'inspector.button.title': 'Button block',
+  'inspector.button.text': 'Text',
+  'inspector.button.url': 'URL',
+  'inspector.button.fullWidth': 'Full width',
+  'inspector.button.size': 'Size',
+  'inspector.button.style': 'Style',
+  'inspector.button.textColor': 'Text color',
+  'inspector.button.bgColor': 'Button color',
+
+  'inspector.image.title': 'Image block',
+  'inspector.image.srcUrl': 'Source URL',
+  'inspector.image.altText': 'Alt text',
+  'inspector.image.linkUrl': 'Click through URL',
+  'inspector.image.width': 'Width',
+  'inspector.image.height': 'Height',
+  'inspector.image.alignment': 'Alignment',
+
+  'inspector.avatar.title': 'Avatar block',
+  'inspector.avatar.size': 'Size',
+  'inspector.avatar.shape': 'Shape',
+  'inspector.avatar.imageUrl': 'Image URL',
+  'inspector.avatar.altText': 'Alt text',
+
+  'inspector.divider.title': 'Divider block',
+  'inspector.divider.color': 'Color',
+  'inspector.divider.height': 'Height',
+
+  'inspector.spacer.title': 'Spacer block',
+  'inspector.spacer.height': 'Height',
+
+  'inspector.html.title': 'HTML block',
+  'inspector.html.content': 'Content',
+
+  'inspector.container.title': 'Container block',
+
+  'inspector.columns.title': 'Columns block',
+  'inspector.columns.count': 'Number of columns',
+  'inspector.columns.gap': 'Columns gap',
+  'inspector.columns.alignment': 'Alignment',
+  'inspector.columns.stackMobile': 'Stack columns on mobile',
+  'inspector.columns.reverseMobile': 'Reverse order on mobile',
 
   // Tune menu
   'tune.moveUp': 'Move up',
@@ -161,6 +222,79 @@ const en: Record<keyof typeof it, string> = {
   'exports.done': 'Export completed.',
   'exports.warningSkipped': 'Some images could not be included (CORS):',
   'exports.generating': 'Generating...',
+
+  // V2.1 — MJML renderer toggle
+  'html.renderer.classic': 'Classic',
+  'html.renderer.mjml': 'MJML',
+  'html.renderer.mjmlInfo':
+    'MJML generates email-client compatible HTML with Outlook ghost tables, mobile media queries, and inlined CSS. Heavier than the classic renderer but maximum compatibility.',
+  'html.renderer.mjmlLoading': 'Compiling MJML…',
+
+  // V2.5 — Template versioning
+  'versions.menu': 'Version history',
+  'versions.title': 'Version history',
+  'versions.empty': 'No versions saved yet. Versions are created automatically on each save.',
+  'versions.versionLabel': 'v',
+  'versions.restore': 'Restore',
+  'versions.restored': 'Version restored.',
+
+  // V3.1 — AI Assistant
+  'ai.assistant.openBtn': 'AI Assistant',
+  'ai.assistant.title': 'AI Assistant',
+  'ai.assistant.infoLabel': 'Information',
+  'ai.assistant.infoTitle': 'What it can do',
+  'ai.assistant.info':
+    '✅ Modifies colors, spacing, fonts, and properties of existing blocks.\n\n❌ Cannot add or remove blocks, nor change the email structure.\n\nDescribe the change in Italian or English.\nChanges are always reversible with Cmd+Z.',
+  'ai.assistant.placeholder': 'Describe the change to apply… (Cmd+Enter to send)',
+  'ai.assistant.chip.contrast': 'More contrast',
+  'ai.assistant.chip.spacing': 'Airy layout',
+  'ai.assistant.chip.dark': 'Dark palette',
+  'ai.assistant.chip.minimal': 'Minimal style',
+  'ai.assistant.submit': 'Apply with AI',
+  'ai.assistant.hint': 'Cmd+Enter to send',
+  'ai.assistant.loading': 'AI is analyzing the template…',
+  'ai.assistant.noOps': 'No applicable changes. Try a more specific description.',
+  'ai.assistant.changesLabel': 'Proposed changes',
+  'ai.assistant.undoHint': 'Reversible with Cmd+Z',
+  'ai.assistant.apply': 'Apply',
+  'ai.assistant.ignore': 'Ignore',
+  'ai.assistant.applied': 'Changes applied. Use Cmd+Z to undo.',
+
+  // V3.3 — Dynamic variables
+  'variables.openBtn': 'Variables',
+  'variables.title': 'Template variables',
+  'variables.infoLabel': 'Information',
+  'variables.info':
+    'Variables {{name}} are replaced by test values only in preview. In ZIP and JSON exports, the original {{name}} syntax is always preserved.',
+  'variables.description':
+    'Set test values for variables detected in the template. Visible only in preview.',
+  'variables.detected': 'Detected variables',
+  'variables.none': 'No variables detected in the template.',
+  'variables.noneHint': 'Use the {{variable_name}} syntax in any text block.',
+  'variables.placeholder': 'Test value…',
+  // V3.4 — Advanced color picker
+  'color.tab.picker': 'Picker',
+  'color.tab.project': 'Project',
+  'color.tab.harmony': 'Harmony',
+  'color.tab.ai': 'AI',
+  'color.project.empty': 'No colors used in the template yet.',
+  'color.harmony.complementary': 'Complementary',
+  'color.harmony.splitComp': 'Split-comp.',
+  'color.harmony.analogous': 'Analogous',
+  'color.harmony.triadic': 'Triadic',
+  'color.harmony.tints': 'Tints',
+  'color.harmony.shades': 'Shades',
+  'color.ai.suggest': 'Suggest color',
+  'color.ai.suggesting': 'Analyzing…',
+  'color.ai.use': 'Use this color',
+  'color.ai.element': 'Element:',
+  'color.ai.palette': 'Project palette:',
+  'color.ai.error': 'AI error: try again.',
+
+  'variables.populate': 'Populate with realistic values',
+  'variables.populating': 'Generating values…',
+  'variables.previewToggle': 'Show real values in preview',
+  'variables.close': 'Close',
 };
 
 export default en;

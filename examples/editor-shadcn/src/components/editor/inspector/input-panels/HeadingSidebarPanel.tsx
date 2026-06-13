@@ -5,6 +5,7 @@ import ToggleButton from './helpers/inputs/ToggleButton';
 import { HeadingProps, HeadingPropsDefaults, HeadingPropsSchema } from '@usewaypoint/block-heading';
 
 import AiTextActions from '../../../../ai/AiTextActions';
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import TextInput from './helpers/inputs/TextInput';
@@ -15,6 +16,7 @@ type HeadingSidebarPanelProps = {
   setData: (v: HeadingProps) => void;
 };
 export default function HeadingSidebarPanel({ data, setData }: HeadingSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
   const [aiRev, setAiRev] = useState(0);
 
@@ -29,7 +31,7 @@ export default function HeadingSidebarPanel({ data, setData }: HeadingSidebarPan
   };
 
   return (
-    <BaseSidebarPanel title="Heading block">
+    <BaseSidebarPanel title={t('inspector.heading.title')}>
       <div className="relative">
         <div className="absolute -top-1 right-0 z-10">
           <AiTextActions
@@ -42,7 +44,7 @@ export default function HeadingSidebarPanel({ data, setData }: HeadingSidebarPan
         </div>
         <TextInput
             key={aiRev}
-          label="Content"
+          label={t('inspector.heading.content')}
           rows={3}
           defaultValue={data.props?.text ?? HeadingPropsDefaults.text}
           onChange={(text) => {
@@ -51,7 +53,7 @@ export default function HeadingSidebarPanel({ data, setData }: HeadingSidebarPan
         />
       </div>
       <RadioGroupInput
-        label="Level"
+        label={t('inspector.heading.level')}
         defaultValue={data.props?.level ?? HeadingPropsDefaults.level}
         onChange={(level) => {
           updateData({ ...data, props: { ...data.props, level } });

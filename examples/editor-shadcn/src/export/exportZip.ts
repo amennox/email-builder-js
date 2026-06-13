@@ -1,4 +1,5 @@
 import { renderToStaticMarkup } from '@/email';
+import { renderToMjmlHtml, renderToMjmlString } from '@/mjml';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 
@@ -111,6 +112,18 @@ export async function buildTemplateZip(
 
   zip.file('email.html', rewriteImageUrls(html, mapping));
   zip.file('template.json', JSON.stringify(document, null, 2));
+
+  // Includi anche MJML source + HTML compilato via MJML (output email-client compatibile)
+  try {
+    const mjmlSrc = renderToMjmlString(document);
+    zip.file('email.mjml', mjmlSrc);
+    const mjmlResult = await renderToMjmlHtml(document);
+    if (mjmlResult.html) {
+      zip.file('email-mjml.html', rewriteImageUrls(mjmlResult.html, mapping));
+    }
+  } catch {
+    // MJML è opzionale: non blocca l'export se fallisce
+  }
 
   return {
     zip,

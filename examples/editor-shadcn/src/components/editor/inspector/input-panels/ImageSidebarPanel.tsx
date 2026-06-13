@@ -6,6 +6,7 @@ import { ZodError } from 'zod';
 import ToggleButton from './helpers/inputs/ToggleButton';
 import { ImageProps, ImagePropsSchema } from '@usewaypoint/block-image';
 
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import TextDimensionInput from './helpers/inputs/TextDimensionInput';
@@ -17,6 +18,7 @@ type ImageSidebarPanelProps = {
   setData: (v: ImageProps) => void;
 };
 export default function ImageSidebarPanel({ data, setData }: ImageSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
@@ -30,9 +32,9 @@ export default function ImageSidebarPanel({ data, setData }: ImageSidebarPanelPr
   };
 
   return (
-    <BaseSidebarPanel title="Image block">
+    <BaseSidebarPanel title={t('inspector.image.title')}>
       <TextInput
-        label="Source URL"
+        label={t('inspector.image.srcUrl')}
         defaultValue={data.props?.url ?? ''}
         onChange={(v) => {
           const url = v.trim().length === 0 ? null : v.trim();
@@ -41,12 +43,12 @@ export default function ImageSidebarPanel({ data, setData }: ImageSidebarPanelPr
       />
 
       <TextInput
-        label="Alt text"
+        label={t('inspector.image.altText')}
         defaultValue={data.props?.alt ?? ''}
         onChange={(alt) => updateData({ ...data, props: { ...data.props, alt } })}
       />
       <TextInput
-        label="Click through URL"
+        label={t('inspector.image.linkUrl')}
         defaultValue={data.props?.linkHref ?? ''}
         onChange={(v) => {
           const linkHref = v.trim().length === 0 ? null : v.trim();
@@ -55,19 +57,19 @@ export default function ImageSidebarPanel({ data, setData }: ImageSidebarPanelPr
       />
       <div className="flex gap-3">
         <TextDimensionInput
-          label="Width"
+          label={t('inspector.image.width')}
           defaultValue={data.props?.width}
           onChange={(width) => updateData({ ...data, props: { ...data.props, width } })}
         />
         <TextDimensionInput
-          label="Height"
+          label={t('inspector.image.height')}
           defaultValue={data.props?.height}
           onChange={(height) => updateData({ ...data, props: { ...data.props, height } })}
         />
       </div>
 
       <RadioGroupInput
-        label="Alignment"
+        label={t('inspector.image.alignment')}
         defaultValue={data.props?.contentAlignment ?? 'middle'}
         onChange={(contentAlignment) => updateData({ ...data, props: { ...data.props, contentAlignment } })}
       >

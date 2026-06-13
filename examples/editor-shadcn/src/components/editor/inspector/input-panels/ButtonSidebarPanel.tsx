@@ -5,6 +5,7 @@ import ToggleButton from './helpers/inputs/ToggleButton';
 import { ButtonProps, ButtonPropsDefaults, ButtonPropsSchema } from '@usewaypoint/block-button';
 
 import AiTextActions from '../../../../ai/AiTextActions';
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import ColorInput from './helpers/inputs/ColorInput';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
@@ -16,6 +17,7 @@ type ButtonSidebarPanelProps = {
   setData: (v: ButtonProps) => void;
 };
 export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
   const [aiRev, setAiRev] = useState(0);
 
@@ -38,7 +40,7 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
   const buttonBackgroundColor = data.props?.buttonBackgroundColor ?? ButtonPropsDefaults.buttonBackgroundColor;
 
   return (
-    <BaseSidebarPanel title="Button block">
+    <BaseSidebarPanel title={t('inspector.button.title')}>
       <div className="relative">
         <div className="absolute -top-1 right-0 z-10">
           <AiTextActions
@@ -51,18 +53,18 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
         </div>
         <TextInput
           key={aiRev}
-          label="Text"
+          label={t('inspector.button.text')}
           defaultValue={text}
           onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
         />
       </div>
       <TextInput
-        label="Url"
+        label={t('inspector.button.url')}
         defaultValue={url}
         onChange={(url) => updateData({ ...data, props: { ...data.props, url } })}
       />
       <RadioGroupInput
-        label="Width"
+        label={t('inspector.button.fullWidth')}
         defaultValue={fullWidth ? 'FULL_WIDTH' : 'AUTO'}
         onChange={(v) => updateData({ ...data, props: { ...data.props, fullWidth: v === 'FULL_WIDTH' } })}
       >
@@ -70,7 +72,7 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
         <ToggleButton value="AUTO">Auto</ToggleButton>
       </RadioGroupInput>
       <RadioGroupInput
-        label="Size"
+        label={t('inspector.button.size')}
         defaultValue={size}
         onChange={(size) => updateData({ ...data, props: { ...data.props, size } })}
       >
@@ -80,7 +82,7 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
         <ToggleButton value="large">Lg</ToggleButton>
       </RadioGroupInput>
       <RadioGroupInput
-        label="Style"
+        label={t('inspector.button.style')}
         defaultValue={buttonStyle}
         onChange={(buttonStyle) => updateData({ ...data, props: { ...data.props, buttonStyle } })}
       >
@@ -89,12 +91,12 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
         <ToggleButton value="pill">Pill</ToggleButton>
       </RadioGroupInput>
       <ColorInput
-        label="Text color"
+        label={t('inspector.button.textColor')}
         defaultValue={buttonTextColor}
         onChange={(buttonTextColor) => updateData({ ...data, props: { ...data.props, buttonTextColor } })}
       />
       <ColorInput
-        label="Button color"
+        label={t('inspector.button.bgColor')}
         defaultValue={buttonBackgroundColor}
         onChange={(buttonBackgroundColor) => updateData({ ...data, props: { ...data.props, buttonBackgroundColor } })}
       />

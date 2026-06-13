@@ -5,6 +5,7 @@ import { ZodError } from 'zod';
 
 import { SpacerProps, SpacerPropsDefaults, SpacerPropsSchema } from '@usewaypoint/block-spacer';
 
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import SliderInput from './helpers/inputs/SliderInput';
 
@@ -13,6 +14,7 @@ type SpacerSidebarPanelProps = {
   setData: (v: SpacerProps) => void;
 };
 export default function SpacerSidebarPanel({ data, setData }: SpacerSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
@@ -26,9 +28,9 @@ export default function SpacerSidebarPanel({ data, setData }: SpacerSidebarPanel
   };
 
   return (
-    <BaseSidebarPanel title="Spacer block">
+    <BaseSidebarPanel title={t('inspector.spacer.title')}>
       <SliderInput
-        label="Height"
+        label={t('inspector.spacer.height')}
         iconLabel={<MoveVertical />}
         units="px"
         step={4}

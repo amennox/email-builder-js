@@ -3,6 +3,7 @@ import { ZodError } from 'zod';
 
 import { HtmlProps, HtmlPropsSchema } from '@usewaypoint/block-html';
 
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import TextInput from './helpers/inputs/TextInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
@@ -12,6 +13,7 @@ type HtmlSidebarPanelProps = {
   setData: (v: HtmlProps) => void;
 };
 export default function HtmlSidebarPanel({ data, setData }: HtmlSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
@@ -25,9 +27,9 @@ export default function HtmlSidebarPanel({ data, setData }: HtmlSidebarPanelProp
   };
 
   return (
-    <BaseSidebarPanel title="Html block">
+    <BaseSidebarPanel title={t('inspector.html.title')}>
       <TextInput
-        label="Content"
+        label={t('inspector.html.content')}
         rows={5}
         defaultValue={data.props?.contents ?? ''}
         onChange={(contents) => updateData({ ...data, props: { ...data.props, contents } })}

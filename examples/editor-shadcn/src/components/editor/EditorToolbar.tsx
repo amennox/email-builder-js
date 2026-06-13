@@ -15,7 +15,9 @@ import {
   Save,
   Share2,
   Smartphone,
+  Sparkles,
   Sun,
+  Tags,
   Undo2,
   Upload,
 } from 'lucide-react';
@@ -62,8 +64,10 @@ import { useT } from '@/lib/i18n';
 import { toggleUiTheme } from '@/lib/theme';
 import { getTemplate, saveTemplate } from '@/templates/templateStore';
 
+import AiAssistantDialog from './AiAssistantDialog';
 import ImportJsonDialog from './ImportJsonDialog';
 import PreflightDialog from './PreflightDialog';
+import VariablesDialog from './VariablesDialog';
 import WeightBadge from './WeightBadge';
 
 function downloadJson(document: object, name: string) {
@@ -89,6 +93,8 @@ export default function EditorToolbar() {
   const [saveAsName, setSaveAsName] = useState('');
   const [importOpen, setImportOpen] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [variablesOpen, setVariablesOpen] = useState(false);
   const [, forceRender] = useState(0);
   const { canUndo, canRedo } = useCanUndoRedo();
 
@@ -228,6 +234,37 @@ export default function EditorToolbar() {
           </ToggleGroupItem>
         </ToggleGroup>
 
+        {/* ── AI Assistant ── */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              onClick={() => setAiOpen(true)}
+            >
+              <Sparkles className="size-3.5" />
+              <span className="hidden lg:inline">{t('ai.assistant.openBtn')}</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{t('ai.assistant.openBtn')}</TooltipContent>
+        </Tooltip>
+
+        {/* ── Variabili ── */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="size-8"
+              onClick={() => setVariablesOpen(true)}
+            >
+              <Tags className="size-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{t('variables.openBtn')}</TooltipContent>
+        </Tooltip>
+
         <Button size="sm" className="ml-1" onClick={handleSave}>
           <Save />
           {t('editor.save')}
@@ -332,6 +369,9 @@ export default function EditorToolbar() {
       </Dialog>
 
       {importOpen && <ImportJsonDialog onClose={() => setImportOpen(false)} />}
+
+      <AiAssistantDialog open={aiOpen} onClose={() => setAiOpen(false)} />
+      <VariablesDialog open={variablesOpen} onClose={() => setVariablesOpen(false)} />
     </div>
   );
 }

@@ -9,6 +9,7 @@ import ColumnsContainerPropsSchema, {
   ColumnsContainerProps,
 } from '../../../../documents/blocks/ColumnsContainer/ColumnsContainerPropsSchema';
 
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import ColumnWidthsInput from './helpers/inputs/ColumnWidthsInput';
 import BooleanInput from './helpers/inputs/BooleanInput';
@@ -21,6 +22,7 @@ type ColumnsContainerPanelProps = {
   setData: (v: ColumnsContainerProps) => void;
 };
 export default function ColumnsContainerPanel({ data, setData }: ColumnsContainerPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
   const updateData = (d: unknown) => {
     const res = ColumnsContainerPropsSchema.safeParse(d);
@@ -33,9 +35,9 @@ export default function ColumnsContainerPanel({ data, setData }: ColumnsContaine
   };
 
   return (
-    <BaseSidebarPanel title="Columns block">
+    <BaseSidebarPanel title={t('inspector.columns.title')}>
       <RadioGroupInput
-        label="Number of columns"
+        label={t('inspector.columns.count')}
         defaultValue={data.props?.columnsCount === 2 ? '2' : '3'}
         onChange={(v) => {
           updateData({ ...data, props: { ...data.props, columnsCount: v === '2' ? 2 : 3 } });
@@ -51,7 +53,7 @@ export default function ColumnsContainerPanel({ data, setData }: ColumnsContaine
         }}
       />
       <SliderInput
-        label="Columns gap"
+        label={t('inspector.columns.gap')}
         iconLabel={<StretchHorizontal />}
         units="px"
         step={4}
@@ -62,7 +64,7 @@ export default function ColumnsContainerPanel({ data, setData }: ColumnsContaine
         onChange={(columnsGap) => updateData({ ...data, props: { ...data.props, columnsGap } })}
       />
       <RadioGroupInput
-        label="Alignment"
+        label={t('inspector.columns.alignment')}
         defaultValue={data.props?.contentAlignment ?? 'middle'}
         onChange={(contentAlignment) => {
           updateData({ ...data, props: { ...data.props, contentAlignment } });
@@ -80,12 +82,12 @@ export default function ColumnsContainerPanel({ data, setData }: ColumnsContaine
       </RadioGroupInput>
 
       <BooleanInput
-        label="Stack columns on mobile"
+        label={t('inspector.columns.stackMobile')}
         defaultValue={data.props?.stackOnMobile ?? false}
         onChange={(stackOnMobile) => updateData({ ...data, props: { ...data.props, stackOnMobile } })}
       />
       <BooleanInput
-        label="Reverse order on mobile"
+        label={t('inspector.columns.reverseMobile')}
         defaultValue={data.props?.reverseColumnsOnMobile ?? false}
         onChange={(reverseColumnsOnMobile) =>
           updateData({ ...data, props: { ...data.props, reverseColumnsOnMobile } })

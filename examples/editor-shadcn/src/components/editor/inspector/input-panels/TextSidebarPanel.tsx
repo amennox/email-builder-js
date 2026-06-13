@@ -4,6 +4,7 @@ import { ZodError } from 'zod';
 import { TextProps, TextPropsSchema } from '@usewaypoint/block-text';
 
 import AiTextActions from '../../../../ai/AiTextActions';
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import BooleanInput from './helpers/inputs/BooleanInput';
 import TextInput from './helpers/inputs/TextInput';
@@ -14,6 +15,7 @@ type TextSidebarPanelProps = {
   setData: (v: TextProps) => void;
 };
 export default function TextSidebarPanel({ data, setData }: TextSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
   const [aiRev, setAiRev] = useState(0);
 
@@ -28,7 +30,7 @@ export default function TextSidebarPanel({ data, setData }: TextSidebarPanelProp
   };
 
   return (
-    <BaseSidebarPanel title="Text block">
+    <BaseSidebarPanel title={t('inspector.text.title')}>
       <div className="relative">
         <div className="absolute -top-1 right-0 z-10">
           <AiTextActions
@@ -41,14 +43,14 @@ export default function TextSidebarPanel({ data, setData }: TextSidebarPanelProp
         </div>
         <TextInput
           key={aiRev}
-          label="Content"
+          label={t('inspector.text.content')}
           rows={5}
           defaultValue={data.props?.text ?? ''}
           onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
         />
       </div>
       <BooleanInput
-        label="Markdown (GitHub flavored)"
+        label={t('inspector.text.markdown')}
         defaultValue={data.props?.markdown ?? false}
         onChange={(markdown) => updateData({ ...data, props: { ...data.props, markdown } })}
       />

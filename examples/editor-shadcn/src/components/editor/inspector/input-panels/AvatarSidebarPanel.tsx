@@ -6,6 +6,7 @@ import { ZodError } from 'zod';
 import ToggleButton from './helpers/inputs/ToggleButton';
 import { AvatarProps, AvatarPropsDefaults, AvatarPropsSchema } from '@usewaypoint/block-avatar';
 
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import SliderInput from './helpers/inputs/SliderInput';
@@ -17,6 +18,7 @@ type AvatarSidebarPanelProps = {
   setData: (v: AvatarProps) => void;
 };
 export default function AvatarSidebarPanel({ data, setData }: AvatarSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
   const updateData = (d: unknown) => {
     const res = AvatarPropsSchema.safeParse(d);
@@ -34,9 +36,9 @@ export default function AvatarSidebarPanel({ data, setData }: AvatarSidebarPanel
   const shape = data.props?.shape ?? AvatarPropsDefaults.shape;
 
   return (
-    <BaseSidebarPanel title="Avatar block">
+    <BaseSidebarPanel title={t('inspector.avatar.title')}>
       <SliderInput
-        label="Size"
+        label={t('inspector.avatar.size')}
         iconLabel={<Ratio />}
         units="px"
         step={3}
@@ -48,7 +50,7 @@ export default function AvatarSidebarPanel({ data, setData }: AvatarSidebarPanel
         }}
       />
       <RadioGroupInput
-        label="Shape"
+        label={t('inspector.avatar.shape')}
         defaultValue={shape}
         onChange={(shape) => {
           updateData({ ...data, props: { ...data.props, shape } });
@@ -59,14 +61,14 @@ export default function AvatarSidebarPanel({ data, setData }: AvatarSidebarPanel
         <ToggleButton value="rounded">Rounded</ToggleButton>
       </RadioGroupInput>
       <TextInput
-        label="Image URL"
+        label={t('inspector.avatar.imageUrl')}
         defaultValue={imageUrl}
         onChange={(imageUrl) => {
           updateData({ ...data, props: { ...data.props, imageUrl } });
         }}
       />
       <TextInput
-        label="Alt text"
+        label={t('inspector.avatar.altText')}
         defaultValue={alt}
         onChange={(alt) => {
           updateData({ ...data, props: { ...data.props, alt } });

@@ -3,6 +3,7 @@ import type { ZodError } from 'zod';
 
 import ContainerPropsSchema, { ContainerProps } from '../../../../documents/blocks/Container/ContainerPropsSchema';
 
+import { useT } from '../../../../lib/i18n';
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
 
@@ -12,6 +13,7 @@ type ContainerSidebarPanelProps = {
 };
 
 export default function ContainerSidebarPanel({ data, setData }: ContainerSidebarPanelProps) {
+  const t = useT();
   const [, setErrors] = useState<ZodError | null>(null);
   const updateData = (d: unknown) => {
     const res = ContainerPropsSchema.safeParse(d);
@@ -23,7 +25,7 @@ export default function ContainerSidebarPanel({ data, setData }: ContainerSideba
     }
   };
   return (
-    <BaseSidebarPanel title="Container block">
+    <BaseSidebarPanel title={t('inspector.container.title')}>
       <MultiStylePropertyPanel
         names={['backgroundColor', 'borderColor', 'borderRadius', 'padding']}
         value={data.style}

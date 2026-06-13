@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Copy, EllipsisVertical, FileArchive, FolderOpen, Loader2, Pencil, Plus, Trash2 } from 'lucide-react';
+import { Copy, EllipsisVertical, FileArchive, FolderOpen, History, Loader2, Pencil, Plus, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import {
@@ -46,6 +46,7 @@ import {
 import { openTemplate } from '../shell/navigation';
 
 import TemplateCard from './TemplateCard';
+import { VersionHistoryPanel } from './VersionHistoryPanel';
 
 function formatDate(iso: string, locale: string) {
   return new Date(iso).toLocaleString(locale === 'it' ? 'it-IT' : 'en-GB', {
@@ -63,6 +64,7 @@ export default function MyTemplatesView() {
   const [renameValue, setRenameValue] = useState('');
   const [deleting, setDeleting] = useState<TSavedTemplate | null>(null);
   const [exportingId, setExportingId] = useState<string | null>(null);
+  const [historyTemplate, setHistoryTemplate] = useState<TSavedTemplate | null>(null);
 
   const handleNew = () => {
     loadTemplate(EMPTY_EMAIL_MESSAGE, { templateId: null, templateName: null });
@@ -172,6 +174,10 @@ export default function MyTemplatesView() {
                       <FileArchive />
                       {t('templates.exportZip')}
                     </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setHistoryTemplate(tpl)}>
+                      <History />
+                      {t('versions.menu')}
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem variant="destructive" onClick={() => setDeleting(tpl)}>
                       <Trash2 />
@@ -226,6 +232,14 @@ export default function MyTemplatesView() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {historyTemplate && (
+        <VersionHistoryPanel
+          template={historyTemplate}
+          open={historyTemplate !== null}
+          onClose={() => setHistoryTemplate(null)}
+        />
+      )}
     </div>
   );
 }

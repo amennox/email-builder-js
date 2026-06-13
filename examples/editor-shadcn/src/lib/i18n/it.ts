@@ -39,7 +39,7 @@ const it = {
 
   // Templates
   'templates.prefab.title': 'Template prefatti',
-  'templates.prefab.subtitle': 'Punto di partenza pronto all’uso: aprili o usali come base.',
+  'templates.prefab.subtitle': "Punto di partenza pronto all'uso: aprili o usali come base.",
   'templates.my.title': 'I miei template',
   'templates.my.subtitle': 'I template salvati in questo browser.',
   'templates.new': 'Nuovo template',
@@ -53,7 +53,7 @@ const it = {
   'templates.empty.subtitle': 'Crea un nuovo template o parti da un prefatto.',
   'templates.updatedAt': 'Modificato',
   'templates.deleteConfirm.title': 'Eliminare il template?',
-  'templates.deleteConfirm.description': 'L’operazione non è reversibile.',
+  'templates.deleteConfirm.description': "L'operazione non è reversibile.",
   'templates.deleteConfirm.cancel': 'Annulla',
   'templates.deleteConfirm.confirm': 'Elimina',
   'templates.rename.title': 'Rinomina template',
@@ -100,6 +100,67 @@ const it = {
   'inspector.styles': 'Stili',
   'inspector.block': 'Blocco',
   'inspector.noSelection': 'Seleziona un blocco per configurarlo.',
+  'inspector.blockNotFound': 'Blocco non trovato. Clicca su un blocco per reimpostare.',
+
+  // Inspector — EmailLayout (pannello Stili globali)
+  'inspector.global.title': 'Globale',
+  'inspector.global.backdropColor': 'Colore sfondo esterno',
+  'inspector.global.canvasColor': 'Colore canvas',
+  'inspector.global.canvasBorderColor': 'Bordo canvas',
+  'inspector.global.canvasBorderRadius': 'Raggio bordo canvas',
+  'inspector.global.fontFamily': 'Font',
+  'inspector.global.textColor': 'Colore testo',
+
+  // Inspector — blocchi
+  'inspector.heading.title': 'Blocco Titolo',
+  'inspector.heading.content': 'Contenuto',
+  'inspector.heading.level': 'Livello',
+
+  'inspector.text.title': 'Blocco Testo',
+  'inspector.text.content': 'Contenuto',
+  'inspector.text.markdown': 'Markdown (GitHub flavored)',
+
+  'inspector.button.title': 'Blocco Bottone',
+  'inspector.button.text': 'Testo',
+  'inspector.button.url': 'URL',
+  'inspector.button.fullWidth': 'Larghezza intera',
+  'inspector.button.size': 'Dimensione',
+  'inspector.button.style': 'Stile',
+  'inspector.button.textColor': 'Colore testo',
+  'inspector.button.bgColor': 'Colore bottone',
+
+  'inspector.image.title': 'Blocco Immagine',
+  'inspector.image.srcUrl': 'URL immagine',
+  'inspector.image.altText': 'Testo alternativo',
+  'inspector.image.linkUrl': 'URL link',
+  'inspector.image.width': 'Larghezza',
+  'inspector.image.height': 'Altezza',
+  'inspector.image.alignment': 'Allineamento',
+
+  'inspector.avatar.title': 'Blocco Avatar',
+  'inspector.avatar.size': 'Dimensione',
+  'inspector.avatar.shape': 'Forma',
+  'inspector.avatar.imageUrl': 'URL immagine',
+  'inspector.avatar.altText': 'Testo alternativo',
+
+  'inspector.divider.title': 'Blocco Separatore',
+  'inspector.divider.color': 'Colore',
+  'inspector.divider.height': 'Spessore',
+
+  'inspector.spacer.title': 'Blocco Spazio',
+  'inspector.spacer.height': 'Altezza',
+
+  'inspector.html.title': 'Blocco HTML',
+  'inspector.html.content': 'Contenuto',
+
+  'inspector.container.title': 'Blocco Contenitore',
+
+  'inspector.columns.title': 'Blocco Colonne',
+  'inspector.columns.count': 'Numero colonne',
+  'inspector.columns.gap': 'Spazio tra colonne',
+  'inspector.columns.alignment': 'Allineamento',
+  'inspector.columns.stackMobile': 'Impila su mobile',
+  'inspector.columns.reverseMobile': 'Inverti ordine su mobile',
 
   // Tune menu
   'tune.moveUp': 'Sposta su',
@@ -116,7 +177,7 @@ const it = {
   // Dark preview
   'preview.darkToggle': 'Simula dark mode',
   'preview.darkInfo':
-    'Simulazione dell’inversione colori tipica dei client email. La gestione reale (asset alternativi, selettori Gmail) arriva con la pipeline MJML.',
+    'Simulazione visiva della dark mode nei client email. Per un output email-client compatibile con gestione dark mode reale, usa il renderer MJML nella tab HTML.',
 
   // AI
   'ai.improve': 'Migliora',
@@ -128,17 +189,17 @@ const it = {
   'ai.error': 'Errore AI: riprova.',
   'ai.unavailable': 'Proxy AI non raggiungibile. Avvialo con: npm run ai-proxy',
   'ai.generateSection': 'Genera con AI',
-  'ai.generateSection.title': 'Genera una sezione con l’AI',
+  'ai.generateSection.title': "Genera una sezione con l'AI",
   'ai.generateSection.description':
     'Descrivi la sezione da creare (es. "tre prodotti in offerta con sfondo azzurro e bottone rosso").',
   'ai.generateSection.placeholder': 'Descrivi la sezione…',
   'ai.generateSection.submit': 'Genera',
-  'ai.generateSection.invalid': 'L’AI ha prodotto una struttura non valida. Riprova con una descrizione diversa.',
+  'ai.generateSection.invalid': "L'AI ha prodotto una struttura non valida. Riprova con una descrizione diversa.",
   'ai.done': 'Fatto.',
 
   // Preflight
   'preflight.title': 'Verifica email',
-  'preflight.subtitle': 'Controlli di qualità e accessibilità prima dell’invio.',
+  'preflight.subtitle': "Controlli di qualità e accessibilità prima dell'invio.",
   'preflight.ok': 'Nessun problema rilevato.',
   'preflight.missingAlt': 'Immagine senza testo alternativo (alt)',
   'preflight.emptyHref': 'Bottone o link senza destinazione (href)',
@@ -159,6 +220,79 @@ const it = {
   'exports.done': 'Esportazione completata.',
   'exports.warningSkipped': 'Alcune immagini non sono state incluse (CORS):',
   'exports.generating': 'Generazione in corso...',
+
+  // V2.1 — MJML renderer toggle
+  'html.renderer.classic': 'Classico',
+  'html.renderer.mjml': 'MJML',
+  'html.renderer.mjmlInfo':
+    'MJML genera HTML email-client compatibile con ghost table per Outlook, media query per mobile e CSS inline. Più pesante del renderer classico ma con la massima compatibilità.',
+  'html.renderer.mjmlLoading': 'Compilazione MJML in corso…',
+
+  // V2.5 — Versioning template
+  'versions.menu': 'Cronologia versioni',
+  'versions.title': 'Cronologia versioni',
+  'versions.empty': 'Nessuna versione salvata. Le versioni vengono create automaticamente a ogni salvataggio.',
+  'versions.versionLabel': 'v',
+  'versions.restore': 'Ripristina',
+  'versions.restored': 'Versione ripristinata.',
+
+  // V3.1 — AI Assistant
+  'ai.assistant.openBtn': 'Assistente AI',
+  'ai.assistant.title': 'Assistente AI',
+  'ai.assistant.infoLabel': 'Informazioni',
+  'ai.assistant.infoTitle': 'Cosa può fare',
+  'ai.assistant.info':
+    '✅ Modifica colori, spaziature, font e proprietà dei blocchi esistenti.\n\n❌ Non aggiunge né rimuove blocchi, né cambia la struttura dell\'email.\n\nDescrivi la modifica in italiano o inglese.\nLe modifiche sono sempre reversibili con Cmd+Z.',
+  'ai.assistant.placeholder': 'Descrivi la modifica da apportare… (Cmd+Invio per inviare)',
+  'ai.assistant.chip.contrast': 'Più contrasto',
+  'ai.assistant.chip.spacing': 'Layout aerato',
+  'ai.assistant.chip.dark': 'Palette scura',
+  'ai.assistant.chip.minimal': 'Stile minimal',
+  'ai.assistant.submit': 'Applica con AI',
+  'ai.assistant.hint': 'Cmd+Invio per inviare',
+  'ai.assistant.loading': "L'AI sta analizzando il template…",
+  'ai.assistant.noOps': 'Nessuna modifica applicabile. Prova con una descrizione più specifica.',
+  'ai.assistant.changesLabel': 'Modifiche proposte',
+  'ai.assistant.undoHint': 'Reversibile con Cmd+Z',
+  'ai.assistant.apply': 'Applica',
+  'ai.assistant.ignore': 'Ignora',
+  'ai.assistant.applied': 'Modifiche applicate. Usa Cmd+Z per annullare.',
+
+  // V3.3 — Variabili dinamiche
+  'variables.openBtn': 'Variabili',
+  'variables.title': 'Variabili template',
+  'variables.infoLabel': 'Informazioni',
+  'variables.info':
+    'Le variabili {{nome}} vengono sostituite dai valori di test solo nell\'anteprima. Nell\'esportazione ZIP e JSON la sintassi originale {{nome}} viene sempre preservata.',
+  'variables.description':
+    'Inserisci valori di test per le variabili rilevate nel template. Visibili solo in anteprima.',
+  'variables.detected': 'Variabili rilevate',
+  'variables.none': 'Nessuna variabile rilevata nel template.',
+  'variables.noneHint': 'Usa la sintassi {{nome_variabile}} in qualsiasi blocco testo.',
+  'variables.placeholder': 'Valore di test…',
+  // V3.4 — Color picker avanzato
+  'color.tab.picker': 'Selettore',
+  'color.tab.project': 'Progetto',
+  'color.tab.harmony': 'Armonia',
+  'color.tab.ai': 'AI',
+  'color.project.empty': 'Nessun colore usato nel template.',
+  'color.harmony.complementary': 'Complementare',
+  'color.harmony.splitComp': 'Split-comp.',
+  'color.harmony.analogous': 'Analoghi',
+  'color.harmony.triadic': 'Triadico',
+  'color.harmony.tints': 'Tinte',
+  'color.harmony.shades': 'Ombre',
+  'color.ai.suggest': 'Suggerisci colore',
+  'color.ai.suggesting': 'Analisi in corso…',
+  'color.ai.use': 'Usa questo colore',
+  'color.ai.element': 'Elemento:',
+  'color.ai.palette': 'Palette progetto:',
+  'color.ai.error': 'Errore AI: riprova.',
+
+  'variables.populate': 'Popola con valori verosimili',
+  'variables.populating': 'Generazione valori…',
+  'variables.previewToggle': 'Mostra valori reali in anteprima',
+  'variables.close': 'Chiudi',
 } as const;
 
 export default it;
