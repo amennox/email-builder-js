@@ -2,6 +2,7 @@ import { TEditorConfiguration } from '../documents/editor/core';
 import EMPTY_EMAIL_MESSAGE from '../getConfiguration/sample/empty-email-message';
 import HOTEL_POST_STAY from '../getConfiguration/sample/hotel-post-stay';
 import HOTEL_PRE_STAY from '../getConfiguration/sample/hotel-pre-stay';
+import HOTEL_PRE_STAY_V2 from '../getConfiguration/sample/hotel-pre-stay-v2';
 import ONE_TIME_PASSCODE from '../getConfiguration/sample/one-time-passcode';
 import ORDER_ECOMMERCE from '../getConfiguration/sample/order-ecommerce';
 import POST_METRICS_REPORT from '../getConfiguration/sample/post-metrics-report';
@@ -20,6 +21,7 @@ export type TPrefabTemplate = {
 export const PREFAB_TEMPLATES: TPrefabTemplate[] = [
   { id: 'empty', name: 'Empty', document: EMPTY_EMAIL_MESSAGE },
   { id: 'hotel-pre-stay', name: 'Hotel — Pre-stay', document: HOTEL_PRE_STAY },
+  { id: 'hotel-pre-stay-v2', name: 'Hotel — Pre-stay (alternative)', document: HOTEL_PRE_STAY_V2 },
   { id: 'hotel-post-stay', name: 'Hotel — Post-stay', document: HOTEL_POST_STAY },
   { id: 'welcome', name: 'Welcome email', document: WELCOME },
   { id: 'one-time-password', name: 'One-time passcode (OTP)', document: ONE_TIME_PASSCODE },
